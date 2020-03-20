@@ -25,9 +25,16 @@ namespace BoligsidenScraper
             InitializeComponent();
         }
 
-        private void On_Button_Run_Clicked(object sender, RoutedEventArgs e)
+        private async void On_Button_Run_Clicked(object sender, RoutedEventArgs e)
         {
             var muni = Municipalities.MunicipalityCollection;
+
+            var handler = new SearchSiteHandler(Municipalities.Alleroed);
+
+            await handler.GetElementsOnPage();
+
+
+
         }
     }
 }
