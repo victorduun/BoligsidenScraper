@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using BoligsidenScraper.Scrapers.Searchsite;
 namespace BoligsidenScraper
 {
     /// <summary>
@@ -23,6 +23,11 @@ namespace BoligsidenScraper
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void On_Button_Run_Clicked(object sender, RoutedEventArgs e)
+        {
+            var muni = Municipalities.MunicipalityCollection;
         }
     }
 }
