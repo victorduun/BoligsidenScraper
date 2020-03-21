@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BoligsidenScraper.Scrapers.Searchsite;
+using Newtonsoft.Json;
+
 namespace BoligsidenScraper
 {
     /// <summary>
@@ -24,15 +20,38 @@ namespace BoligsidenScraper
         {
             InitializeComponent();
         }
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
 
         private async void On_Button_Run_Clicked(object sender, RoutedEventArgs e)
         {
-            var muni = Municipalities.MunicipalityCollection;
+            var municipalities = Municipalities.MunicipalityCollection;
 
-            var handler = new SearchSiteHandler(Municipalities.Alleroed);
+            foreach(string municipality in municipalities)
+            {
+                var handler = new SearchSiteHandler(municipality);
 
-            await handler.GetElementsOnPage();
+                List<PropertySale> sales = await handler.GetAllPropertySales();
+                
+                //Turn to json string
+                string json = JsonConvert.SerializeObject(sales.ToArray(),Formatting.Indented);
 
+                //Write json to file
+                string fileDirectory = AssemblyDirectory + "\\kommuner";
+                string completeFilePath = fileDirectory + "\\" + municipality + ".json";
+                Directory.CreateDirectory(fileDirectory);
+                File.WriteAllText(completeFilePath, json);
+            }
+
+        
 
 
         }
