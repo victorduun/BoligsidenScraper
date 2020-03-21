@@ -16,7 +16,8 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap" x:Name="InfoText">
-            <Run Text="  Information for each municipality will be stored in a seperate .json file in the path: &#x0a;"/>
+            <Run Text=" Currently the only way to cancel data scraping is by closing the application.&#x0a;"/>
+            <Run Text="Information for each municipality will be stored in a seperate .json file in the path:&#x0a;"/>
             <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
                 Text="{Binding textdata, Mode=OneWay}"/>
         </TextBlock>
