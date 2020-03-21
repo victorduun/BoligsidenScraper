@@ -5,23 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoligsidenScraper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        MinHeight="350" Height="350" 
+        MinWidth="600" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap" x:Name="InfoText">
-            <Run Text=" Currently the only way to cancel data scraping is by closing the application.&#x0a;"/>
-            <Run Text="Information for each municipality will be stored in a seperate .json file in the path:&#x0a;"/>
+        <TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap">
+            <Run Text="  Currently the only way to cancel data scraping is by closing the application.&#x0a;"/>
+            <Run Text=" Json files can be converted to an excel file using an online converter such as&#x0a;"/>
+            <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
+                Text="https://www.aconvert.com/document/json-to-xls/&#x0a;"/>
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" x:Name="InfoText">
+            <Run Text="  Information for each municipality will be stored in a seperate .json file in the path:&#x0a;"/>
             <TextBox Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap"
                 Text="{Binding textdata, Mode=OneWay}"/>
         </TextBlock>
-        <ComboBox Grid.Row="1" x:Name="cmbMunicipalityList"   
+        <ComboBox Grid.Row="2" x:Name="cmbMunicipalityList"   
                                     Width="220"   
                                     Height="50"  
                                     FontSize="18"    
@@ -35,9 +43,9 @@
                                     IsEditable="True"   
                                     Margin="0,20,0,0"/>
 
-        <Button Height="30" Width="80" Grid.Row="2" x:Name="Run" Click="On_Button_Run_Clicked">
+        <Button Height="30" Width="80" Grid.Row="3" x:Name="Run" Click="On_Button_Run_Clicked">
             <TextBlock>Scrape data</TextBlock>
         </Button>
-        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" x:Name="ProgressTextBox">Ready to start data scraping.</TextBlock>
+        <TextBlock Grid.Row="3" VerticalAlignment="Bottom" x:Name="ProgressTextBox">Ready to start data scraping.</TextBlock>
     </Grid>
 </Window>
